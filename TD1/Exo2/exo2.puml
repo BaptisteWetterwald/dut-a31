@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+class Main
+{
+    + {static} main(Strings[])
+}
+
+abstract class Voiture
+{
+    + fairePlein()
+    + accelerer()
+    + klaxonner()
+    - essence : Integer
+    - reservoir : Integer
+    + getEssence() : Integer
+    + getReservoir() : Integer
+}
+
+abstract class VoitureFactory
+{
+    - {static} instance : VoitureFactory
+    - VoitureFactory()
+    + {static} getInstance() : VoitureFactory
+    + createJeep() : Voiture
+    + createFiatMultipla() : Voiture
+    + createSubaru() : Voiture
+}
+
+class Jeep extends Voiture
+{
+    + accelerer()
+    + klaxonner()
+}
+
+class Subaru extends Voiture
+{
+    + accelerer()
+    + klaxonner()
+}
+
+class FiatMultipla extends Voiture
+{
+    + accelerer()
+    + klaxonner()
+}
+
+Main .> VoitureFactory : <<use>>
+Main .> Voiture : <<use>>
+VoitureFactory .> Jeep : <<use>>
+VoitureFactory .> FiatMultipla : <<use>>
+VoitureFactory .> Subaru : <<use>>
+VoitureFactory ..> Voiture : <<use>>
+
+@enduml

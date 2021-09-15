@@ -1,0 +1,28 @@
+@startuml
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+class Outlaw {
+
+    - {static} instance : Outlaw
+    - Outlaw( firstname:String, nickname:String )
+
+    - firstname : String
+    - nickname : String
+    - nbKidnappings: Integer
+
+    + kidnap( lady:Lady )
+    + whoAmI() : String
+    - increaseNbKidnapping()
+    + setFirstname()
+    + setNickname()
+    + getFirstname : String
+    + getNickname : String
+    + {static} getInstance() : Outlaw
+
+}
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+enum LightColor <<enum>>
+{
+    GREEN
+    ORANGE
+    RED
+}
+
+interface LightStrategy <<interface>>
+{
+    + {abstract} getNextColor(trafficLight:TrafficLight) : LightColor
+}
+
+class Main
+{
+    + {static} main(String[])
+}
+
+class TrafficLight
+{
+    - lit : boolean
+    - lightColor : LightColor
+    - oldLightColor : LightColor
+    - lightStrategy : LightStrategy
+
+    + TrafficLight()
+    + changeColor() : void
+    + changeState() : void
+    + getLightColor() : LightColor
+}
+
+class FranceStrategy implements LightStrategy
+{
+    + FranceStrategy()
+    + getNextColor(trafficLight:TrafficLight) : LightColor
+}
+
+class GermanyStrategy implements LightStrategy
+{
+    + GermanyStrategy()
+    + getNextColor(trafficLight:TrafficLight) : LightColor
+    + getOldLightColor() : LightColor
+    + setOldLightColor() : void
+}
+
+TrafficLight *-> LightStrategy
+TrafficLight *-> LightColor
+Main .up.> TrafficLight : <<use>>
+Main .> LightStrategy : <<use>>
+
+@enduml

@@ -4,8 +4,8 @@ TD n°1
 Exercice 1
 ----------
 
-![](singletonBarEnonce.svg)
-![](singletonOutlawEnonce.svg)
+![](Exo1/singletonBarEnonce.svg)
+![](Exo1/singletonOutlawEnonce.svg)
 
 Pour chacune de ces deux classes, modifiez le diagramme pour en faire un Singleton.
 
@@ -56,7 +56,8 @@ Un feu doit avoir deux fonctionnalités, la première permettant de changer son 
 
 1. Proposez un diagramme de classes modélisant un tel feu.
 1. Implémentez ce feu en java.
-1. Écrivez un programme qui crée un feu, l'allume puis change 5 fois sa couleur, en affichant l'état complet du feu (on/off + couleur) après chaque modification du feu.
+1. Écrivez un programme qui crée un feu, l'allume puis change 5 fois sa couleur, en affichant l'état complet du feu (
+   on/off + couleur) après chaque modification du feu.
 
 ### Un feu - deux ~~bois~~ modes
 
