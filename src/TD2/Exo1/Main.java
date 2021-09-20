@@ -14,5 +14,12 @@ public class Main
         feu2.changeState();
         for (int i=0; i<10; i++)
             feu2.changeColor();
+        System.out.println("-----------ENDED-----------");
+
+        TrafficLight feuBicolore = new TrafficLight(new BicolorStrategy());
+        feuBicolore.changeState();
+        for (int i=0; i<10; i++)
+            feuBicolore.changeColor();
+        System.out.println("-----------ENDED-----------");
     }
 }
