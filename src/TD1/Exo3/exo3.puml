@@ -50,18 +50,11 @@ class GermanyStrategy implements LightStrategy
     + setOldLightColor() : void
 }
 
-class BicolorStrategy implements LightStrategy
-{
-    + BicolorStrategy()
-    + getNextColor(lightColor:LightColor) : LightColor
-}
-
 TrafficLight o-> LightStrategy
 TrafficLight *-left> LightColor
 GermanyStrategy *-> LightColor
 Main .> TrafficLight : <<use>>
 Main .> FranceStrategy : <<use>>
 Main .> GermanyStrategy : <<use>>
-Main .> BicolorStrategy : <<use>>
 
 @enduml
