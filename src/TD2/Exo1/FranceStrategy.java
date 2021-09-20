@@ -4,10 +4,10 @@ public class FranceStrategy implements LightStrategy
 {
 
     @Override
-    public LightColor getNextColor(TrafficLight trafficLight)
+    public LightColor getNextColor(LightColor lightColor)
     {
         LightColor newColor = null;
-        switch (trafficLight.getLightColor())
+        switch (lightColor)
         {
             case GREEN:
                 newColor = LightColor.ORANGE;

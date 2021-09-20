@@ -4,8 +4,8 @@ public class BicolorStrategy implements LightStrategy
 {
 
     @Override
-    public LightColor getNextColor(TrafficLight trafficLight) {
-        if (trafficLight.getLightColor() == LightColor.GREEN)
+    public LightColor getNextColor(LightColor lightColor) {
+        if (lightColor == LightColor.GREEN)
             return LightColor.RED;
         return LightColor.GREEN;
     }

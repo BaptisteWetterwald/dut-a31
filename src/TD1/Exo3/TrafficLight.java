@@ -11,15 +11,13 @@ public class TrafficLight
         this.lit = false;
         this.lightColor = LightColor.RED;
         this.lightStrategy = strategy;
-        if (lightStrategy instanceof GermanyStrategy)
-            ((GermanyStrategy)this.lightStrategy).setOldLightColor(LightColor.ORANGE);
     }
 
     public void changeColor()
     {
         if (this.lit)
             this.changeState(); //s'éteint
-        this.lightColor = lightStrategy.getNextColor(this);
+        this.lightColor = lightStrategy.getNextColor(this.lightColor);
         System.out.println("Le feu passe au " + this.lightColor.name());
         this.changeState(); //s'allume
     }

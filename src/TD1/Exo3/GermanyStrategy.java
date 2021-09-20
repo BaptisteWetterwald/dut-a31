@@ -4,13 +4,17 @@ public class GermanyStrategy implements LightStrategy
 {
     private LightColor oldLightColor;
 
+    public GermanyStrategy(LightColor oldLightColor)
+    {
+        this.oldLightColor = oldLightColor;
+    }
+
     @Override
-    public LightColor getNextColor(TrafficLight trafficLight)
+    public LightColor getNextColor(LightColor lightColor)
     {
         LightColor newColor = null;
-        LightColor oldColor = this.getOldLightColor();
-        this.setOldLightColor(trafficLight.getLightColor());
-        switch (trafficLight.getLightColor())
+        LightColor oldColor = this.oldLightColor;
+        switch (lightColor)
         {
             case GREEN:
                 newColor = LightColor.ORANGE;
@@ -27,13 +31,5 @@ public class GermanyStrategy implements LightStrategy
         }
 
         return newColor;
-    }
-
-    public LightColor getOldLightColor() {
-        return this.oldLightColor;
-    }
-
-    public void setOldLightColor(LightColor lightColor) {
-        this.oldLightColor = lightColor;
     }
 }

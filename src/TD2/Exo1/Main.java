@@ -8,9 +8,9 @@ public class Main
         feu.changeState();
         for (int i=0; i<10; i++)
             feu.changeColor();
-
         System.out.println("-----------ENDED-----------");
-        TrafficLight feu2 = new TrafficLight(new GermanyStrategy());
+
+        TrafficLight feu2 = new TrafficLight(new GermanyStrategy(LightColor.ORANGE));
         feu2.changeState();
         for (int i=0; i<10; i++)
             feu2.changeColor();
