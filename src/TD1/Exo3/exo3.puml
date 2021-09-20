@@ -51,8 +51,9 @@ class GermanyStrategy implements LightStrategy
 }
 
 TrafficLight *-> LightStrategy
-TrafficLight *-> LightColor
-Main .up.> TrafficLight : <<use>>
-Main .> LightStrategy : <<use>>
+TrafficLight *-left> LightColor
+Main .> TrafficLight : <<use>>
+Main .> FranceStrategy : <<use>>
+Main .> GermanyStrategy : <<use>>
 
 @enduml
