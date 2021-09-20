@@ -15,7 +15,7 @@ enum LightColor <<enum>>
 
 interface LightStrategy <<interface>>
 {
-    + {abstract} getNextColor(trafficLight:TrafficLight) : LightColor
+    + {abstract} getNextColor(lightColor:LightColor) : LightColor
 }
 
 class Main
@@ -39,13 +39,13 @@ class TrafficLight
 class FranceStrategy implements LightStrategy
 {
     + FranceStrategy()
-    + getNextColor(trafficLight:TrafficLight) : LightColor
+    + getNextColor(lightColor:LightColor) : LightColor
 }
 
 class GermanyStrategy implements LightStrategy
 {
-    + GermanyStrategy()
-    + getNextColor(trafficLight:TrafficLight) : LightColor
+    + GermanyStrategy(oldLightColor:LightColor)
+    + getNextColor(lightColor:LightColor) : LightColor
     + getOldLightColor() : LightColor
     + setOldLightColor() : void
 }
@@ -53,14 +53,15 @@ class GermanyStrategy implements LightStrategy
 class BicolorStrategy implements LightStrategy
 {
     + BicolorStrategy()
-    + getNextColor((trafficLight:TrafficLight) : LightColor
+    + getNextColor(lightColor:LightColor) : LightColor
 }
 
-TrafficLight *-> LightStrategy
+TrafficLight o-> LightStrategy
 TrafficLight *-left> LightColor
+GermanyStrategy *-> LightColor
 Main .> TrafficLight : <<use>>
 Main .> FranceStrategy : <<use>>
 Main .> GermanyStrategy : <<use>>
-
+Main .> BicolorStrategy : <<use>>
 
 @enduml
