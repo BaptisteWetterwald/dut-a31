@@ -33,4 +33,9 @@ public class TrafficLight
         for (TrafficLightObserver observer : observers)
             observer.update(this);
     }
+
+    private void addObserver()
+    {
+
+    }
 }
