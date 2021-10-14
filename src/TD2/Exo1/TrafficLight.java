@@ -8,7 +8,7 @@ public class TrafficLight
     private boolean lit;
     private LightColor lightColor;
     private LightStrategy lightStrategy;
-    private List<TrafficLightObserver> observers;
+    private List<Observer> observers;
 
     public TrafficLight(LightStrategy strategy)
     {
@@ -30,12 +30,22 @@ public class TrafficLight
 
     private void notifyObservers()
     {
-        for (TrafficLightObserver observer : observers)
+        for (Observer observer : observers)
             observer.update(this);
     }
 
-    private void addObserver()
+    public void addObserver(Observer observer)
     {
+        observers.add(observer);
+    }
 
+    public String getLightStrategy()
+    {
+        return this.lightStrategy.getClass().getSimpleName();
+    }
+
+    public boolean isLit()
+    {
+        return this.lit;
     }
 }

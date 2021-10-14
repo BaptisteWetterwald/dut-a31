@@ -1,0 +1,109 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+package model
+{
+    enum LightColor <<enum>>
+    {
+        GREEN
+        ORANGE
+        RED
+    }
+
+    abstract class LightStrategy <<abstract>>
+    {
+        + {abstract} getNextColor(lightColor:LightColor) : LightColor
+        + getStrategyName() : String
+    }
+
+    class TrafficLight
+    {
+        - lightColor : LightColor
+        - lightStrategy : LightStrategy
+        - observers : List<IObserver>
+
+        + TrafficLight()
+        + changeColor() : void
+        + getLightColor() : LightColor
+        + addObserver(observer : IObserver) : void
+        + getLightStrategyName() : String
+        + getLightStrategy() : LightStrategy
+        - notifyObservers() : void
+    }
+
+    class FranceStrategy implements LightStrategy
+    {
+        + FranceStrategy()
+        + getNextColor(lightColor:LightColor) : LightColor
+    }
+
+    class GermanyStrategy implements LightStrategy
+    {
+        - oldLightColor : LightColor
+        + GermanyStrategy(oldLightColor:LightColor)
+        + getNextColor(lightColor:LightColor) : LightColor
+    }
+
+    class BicolorStrategy implements LightStrategy
+    {
+        + BicolorStrategy()
+        + getNextColor(lightColor:LightColor) : LightColor
+    }
+}
+
+package controller
+{
+    class Main
+    {
+        + {static} main(String[]) : void
+    }
+
+    class Facade
+    {
+        + Facade()
+        + createGermanTrafficLight() : void
+        + createFrenchTrafficLight() : void
+        + createBicolorTrafficLight() : void
+        + createDisplayScreen() : void
+        + changeColor() : void
+    }
+}
+
+package view
+{
+    class TrafficLightObserver implements IObserver
+    {
+        - labels : JLabel[]
+        - panel : JPanel
+
+        + TrafficLightObserver(trafficLight:TrafficLight)
+        + update(trafficLight:TrafficLight) : void
+    }
+
+    interface IObserver <<interface>>
+    {
+        + {abstract} update(trafficLight:TrafficLight) : void
+    }
+}
+
+TrafficLight o-left> LightStrategy
+TrafficLight *-> LightColor
+
+GermanyStrategy *-up-> LightColor
+FranceStrategy *-up-> LightColor
+BicolorStrategy *-up-> LightColor
+
+TrafficLight o-> IObserver
+Facade .> TrafficLightObserver : <<use>>
+Facade .> FranceStrategy : <<use>>
+Facade .> GermanyStrategy : <<use>>
+Facade .> BicolorStrategy : <<use>>
+Main o-> Facade
+Facade -> TrafficLight : > concerne
+
+@enduml
