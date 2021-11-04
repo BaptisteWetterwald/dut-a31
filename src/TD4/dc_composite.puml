@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Path <<abstract>> implements IPath
+{
+    - name : String
+    - parent : Folder
+    + Path()
+    + getName() : String
+    + setParent(parent : Folder) : void
+    + getAbsolutePath() : String
+    + getParent() : Folder
+}
+
+interface IPath <<interface>>
+{
+    + {abstract} getSize() : Integer
+    + {abstract} addChild(c : IPath) : void
+    + {abstract} getAbsolutePath() : String
+    + {abstract} getName() : String
+}
+
+class Main
+{
+    + {static} main : void
+}
+
+class Folder extends Path
+{
+    - children : ArrayList<IPath>
+    + addChild(c : IPath) : void
+    + getChild(i : Integer) : IPath
+    + getSize() : Integer
+    + removeChild(i : Integer) : void
+}
+
+class File extends Path
+{
+    - content : String
+    + addChild(c : IPath) : void
+    + getSize() : Integer
+    + getContent() : String
+}
+
+class Root extends Folder
+{
+    + getParent() : Folder
+}
+
+Folder o-up-> IPath
+Path o-down-> Folder
+Main .up> IPath : <<use>>
+Main .down> Folder : <<use>>
+Main .> File : <<use>>
+Main .> Root : <<use>>
+File .left> IPath : <<use>>
+
+@enduml

@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Component implements IComponent
+{
+    - name : String
+    - parentFolder : Folder
+    + Component()
+    + getName() : String
+    + setParentFolder(parentFolder : Folder) : void
+    + getAbsolutePath() : String
+    + getParentFolder() : Folder
+    + getSize() : Integer
+}
+
+interface IComponent
+{
+    + {abstract} addChild(c : IComponent) : void
+    + {abstract} getAbsolutePath() : String
+    + {abstract} getName() : String
+}
+
+class Main
+{
+    + {static} main : void
+}
+
+class Folder extends Component
+{
+    - childrenComponents : ArrayList<Component>
+    + addChild(c : Component) : void
+    + getChild(i : Integer) : IComponent
+    + getSize() : Integer
+    + removeChild(i : Integer) : void
+}
+
+class File extends Component
+{
+    - content : String
+    + addChild(c : Component) : void
+    + getSize() : Integer
+    + getContent() : String
+}
+
+class Root extends Folder
+{
+    + getAbsolutePath() : String
+    + getParentFolder() : Folder
+}
+
+Folder o-> Component
+Main .> IComponent : <<use>>
+Main .> Folder : <<use>>
+Main .> File : <<use>>
+Main .> Root : <<use>>
+
+@enduml

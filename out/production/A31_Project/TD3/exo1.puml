@@ -65,11 +65,11 @@ package controller
 
     class Facade
     {
-        + Facade()
-        + createGermanTrafficLight() : void
-        + createFrenchTrafficLight() : void
-        + createBicolorTrafficLight() : void
-        + createDisplayScreen() : void
+        - trafficLight : TrafficLight
+        + Facade(trafficLight:TrafficLight)
+        + switchToFrenchStrategy() : void
+        + switchToGermanStrategy() : void
+        + switchToBicolorStrategy() : void
         + changeColor() : void
     }
 }
@@ -103,7 +103,9 @@ Facade .> TrafficLightObserver : <<use>>
 Facade .> FranceStrategy : <<use>>
 Facade .> GermanyStrategy : <<use>>
 Facade .> BicolorStrategy : <<use>>
-Main o-> Facade
+Main .> Facade : <<use>>
+Main .> TrafficLight : <<use>>
+Main .> TrafficLightObserver : <<use
 Facade -> TrafficLight : > concerne
 
 @enduml

@@ -8,4 +8,8 @@ public class BicolorStrategy extends LightStrategy
             return LightColor.RED;
         return LightColor.GREEN;
     }
+
+    //2 questions
+    //1 : Pq pas de use entre lightcolor et les strats
+    //2 : peut-on mettre le main dans controller ?
 }
