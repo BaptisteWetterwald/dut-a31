@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package v1{
+    abstract class CookieTemplate
+    {
+
+        # tempsCuisson : Integer
+        # ustensileCuisson : String
+        # ustensileSucre : String
+
+        + printRecette()
+        + {abstract} getIngredient() : String
+        + beurre()
+        + sucre()
+        + sucreVanille()
+        + citron()
+        + myrtilles()
+        + oeuf()
+        + levure()
+        + farine()
+        + boule()
+    }
+
+    class CookieChocolate extends CookieTemplate
+    {
+        + CookieChocolate()
+        + getIngredient() : String
+        + sucreVanille()
+        + citron()
+        + myrtilles()
+    }
+
+    class CookieLemon extends CookieTemplate
+    {
+        + CookieLemon()
+        + getIngredient() : String
+        + myrtilles()
+    }
+
+    class CookieBlueberries extends CookieTemplate
+    {
+        + CookieBlueberries()
+        + getIngredient() : String
+        + citron()
+    }
+
+    class Main
+    {
+        + {static} main(args:String[])
+    }
+
+    Main .down.> CookieChocolate : <<use>>
+    Main .down.> CookieLemon : <<use>>
+    Main .down.> CookieBlueberries : <<use>>
+    Main .> CookieTemplate : <<use>>
+}
+@enduml
