@@ -1,21 +1,21 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class Component implements IComponent
+abstract class Path <<abstract>> implements IPath
 {
     - name : String
-    - parentFolder : Folder
-    + Component()
+    - parent : Folder
+    + Path()
     + getName() : String
-    + setParentFolder(parentFolder : Folder) : void
+    + setParent(parent : Folder) : void
     + getAbsolutePath() : String
-    + getParentFolder() : Folder
-    + getSize() : Integer
+    + getParent() : Folder
 }
 
-interface IComponent
+interface IPath <<interface>>
 {
-    + {abstract} addChild(c : IComponent) : void
+    + {abstract} getSize() : Integer
+    + {abstract} addChild(c : IPath) : void
     + {abstract} getAbsolutePath() : String
     + {abstract} getName() : String
 }
@@ -25,33 +25,34 @@ class Main
     + {static} main : void
 }
 
-class Folder extends Component
+class Folder extends Path
 {
-    - childrenComponents : ArrayList<Component>
-    + addChild(c : Component) : void
-    + getChild(i : Integer) : IComponent
+    - children : ArrayList<IPath>
+    + addChild(c : IPath) : void
+    + getChild(i : Integer) : IPath
     + getSize() : Integer
     + removeChild(i : Integer) : void
 }
 
-class File extends Component
+class File extends Path
 {
     - content : String
-    + addChild(c : Component) : void
+    + addChild(c : IPath) : void
     + getSize() : Integer
     + getContent() : String
 }
 
 class Root extends Folder
 {
-    + getAbsolutePath() : String
-    + getParentFolder() : Folder
+    + getParent() : Folder
 }
 
-Folder o-> Component
-Main .> IComponent : <<use>>
-Main .> Folder : <<use>>
+Folder o-up-> IPath
+Path o-down-> Folder
+Main .up> IPath : <<use>>
+Main .down> Folder : <<use>>
 Main .> File : <<use>>
 Main .> Root : <<use>>
+File .left> IPath : <<use>>
 
 @enduml
